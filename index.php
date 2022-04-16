@@ -3,25 +3,25 @@
 include 'autoload.php';
 
 use Ithillel\Auto\Bolid;
-use Ithillel\Auto\MovableInterface;
+use Ithillel\Auto\Engine;
 use Ithillel\Auto\Truck;
+use Ithillel\Staff\Driver;
 
 Truck::setCountry(Truck::COUNTRY_USA);
 Bolid::setCountry(Bolid::COUNTRY_CANADA);
 
-function driveCar(MovableInterface $car)
-{
-    echo $car->info() . PHP_EOL . PHP_EOL;
-    echo $car->start() . PHP_EOL;
-    echo $car->up(80) . PHP_EOL;
-    echo $car->down(10) . PHP_EOL;
-    echo $car->stop() . PHP_EOL . PHP_EOL;
-}
+$driver = new Driver();
 
 $truck = new Truck(20);
 $truck->setWeight(50);
-$cars = [$truck, new Bolid(50)];
+
+$engine = new Engine(50);
+
+// Отношение "Aгрегация"
+$bolid = new Bolid($engine);
+
+$cars = [$truck, $bolid];
 
 foreach ($cars as $car) {
-    driveCar($car);
+    $driver->drive($car);
 }
