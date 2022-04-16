@@ -3,6 +3,11 @@
 interface MovableInterface
 {
     /**
+     * Get info
+     * @return mixed
+     */
+    public function info();
+    /**
      * Start engine
      * @return mixed
      */
