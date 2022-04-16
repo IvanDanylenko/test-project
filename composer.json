@@ -1,0 +1,14 @@
+{
+    "name": "ivan/test-project",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Ivan Danylenko",
+            "email": "danylenko.ivan11@gmail.com"
+        }
+    ],
+    "require": {
+        "guzzlehttp/guzzle": "^7.4",
+        "paquettg/php-html-parser": "^3.1"
+    }
+}
