@@ -1,5 +1,7 @@
 <?php
 
+namespace Ithillel\Auto;
+
 class Truck extends Car
 {
     public const MAX_WEIGHT = 60;

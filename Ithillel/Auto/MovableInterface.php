@@ -1,5 +1,7 @@
 <?php
 
+namespace Ithillel\Auto;
+
 interface MovableInterface
 {
     /**

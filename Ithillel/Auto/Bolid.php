@@ -1,5 +1,7 @@
 <?php
 
+namespace Ithillel\Auto;
+
 // Racing car, very fast
 class Bolid extends Car
 {

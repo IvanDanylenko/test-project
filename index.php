@@ -1,9 +1,10 @@
 <?php
 
-include 'oop/MovableInterface.php';
-include 'oop/Car.php';
-include 'oop/Truck.php';
-include 'oop/Bolid.php';
+include 'autoload.php';
+
+use Ithillel\Auto\Bolid;
+use Ithillel\Auto\MovableInterface;
+use Ithillel\Auto\Truck;
 
 Truck::setCountry(Truck::COUNTRY_USA);
 Bolid::setCountry(Bolid::COUNTRY_CANADA);

@@ -1,5 +1,7 @@
 <?php
 
+namespace Ithillel\Auto;
+
 abstract class Car implements MovableInterface
 {
     public const COUNTRY_USA = 'USA';
