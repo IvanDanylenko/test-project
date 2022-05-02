@@ -8,14 +8,22 @@ class Truck extends Car
 
     protected static $country;
 
+    private $engine;
+
     private $weight;
+
+    public function __construct(int $maxSpeed)
+    {
+        // Отношение "Композиция"
+        $this->engine = new Engine($maxSpeed);
+    }
 
     public function start()
     {
-        if ($this->is_started) {
+        if ($this->engine->getIsStarted()) {
             return 'Truck can\'t start again before it was stopped';
         } else {
-            $this->is_started = true;
+            $this->engine->start();
             $this->speed = 0;
             return 'Truck started to move';
         }
@@ -24,17 +32,20 @@ class Truck extends Car
     public function stop()
     {
         parent::stop();
+        $this->engine->stop();
         return 'Truck stopped';
     }
 
     public function up($unit)
     {
-        if (!$this->is_started) {
+        if (!$this->engine->getIsStarted()) {
             return 'Truck should be started first';
         }
 
-        if ($this->speed + $unit >= $this->max_speed) {
-            $this->speed = $this->max_speed;
+        $maxSpeed = $this->engine->getMaxSpeed();
+
+        if ($this->speed + $unit >= $maxSpeed) {
+            $this->speed = $maxSpeed;
             return 'Truck gained maximum speed: ' . $this->speed . ' units';
         } else {
             $this->speed += $unit;
@@ -44,7 +55,7 @@ class Truck extends Car
 
     public function down($unit)
     {
-        if (!$this->is_started) {
+        if (!$this->engine->getIsStarted()) {
             return 'Truck should be started first';
         }
 

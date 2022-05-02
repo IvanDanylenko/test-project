@@ -15,12 +15,19 @@ class Bolid extends Car
 
     private $isTurbo = false;
 
+    private $engine;
+
+    public function __construct(Engine $engine)
+    {
+        $this->engine = $engine;
+    }
+
     public function start()
     {
-        if ($this->is_started) {
+        if ($this->engine->getIsStarted()) {
             return 'Bolid can\'t start again before it was stopped';
         } else {
-            $this->is_started = true;
+            $this->engine->start();
             $this->speed = 0;
             return 'Bolid started to move';
         }
@@ -29,23 +36,26 @@ class Bolid extends Car
     public function stop()
     {
         parent::stop();
+        $this->engine->stop();
         return 'Bolid stopped';
     }
 
     public function up($unit)
     {
-        if (!$this->is_started) {
+        if (!$this->engine->getIsStarted()) {
             return 'Bolid should be started first';
         }
 
-        if ($this->speed + $unit >= $this->max_speed) {
+        $maxSpeed = $this->engine->getMaxSpeed();
+
+        if ($this->speed + $unit >= $maxSpeed) {
             if ($this->turboCharges > 0) {
-                $this->speed = $this->max_speed + self::TURBO_SPEED_INCREASE;
+                $this->speed = $maxSpeed + self::TURBO_SPEED_INCREASE;
                 $this->turboCharges--;
                 $this->isTurbo = true;
                 return 'Bolid used turbo, his current speed is ' . $this->speed . ' units';
             } else {
-                $this->speed = $this->max_speed;
+                $this->speed = $maxSpeed;
                 return 'Bolid gained maximum speed: ' . $this->speed . ' units';
             }
         } else {
@@ -56,7 +66,7 @@ class Bolid extends Car
 
     public function down($unit)
     {
-        if (!$this->is_started) {
+        if (!$this->engine->getIsStarted()) {
             return 'Bolid should be started first';
         }
 
